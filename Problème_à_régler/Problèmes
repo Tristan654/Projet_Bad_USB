@@ -1,0 +1,19 @@
+1. Utiliser Ngrok pour ne plus etre contraint par le reseau local.
+-------------------------------------------------------------------------------------------------------------------
+Probleme 2. La signature (L'Antivirus) : Ton .exe n'est pas "offusqué". Windows Defender ou n'importe quel antivirus verra un script Python qui tente d'ouvrir un socket réseau et de lancer subprocess. Il va le bloquer en 2 secondes car son "empreinte" est archi-connue.
+Solution pour 2: - Utiliser un obfusqueur (PyArmor)
+		 - Le "Packing" manuel (L'astuce du base64)
+		 - Changer le comportement de l'Antivirus (Exclusion) (*)
+		
+(*) Puisque tu as un accès physique avec ta BadUSB, tu peux tricher. Avant de télécharger ton malware, ta clé peut taper une commande PowerShell ultra-rapide qui dit à Windows Defender : "N'analyse pas ce dossier spécifique, j'ai confiance". La commande que ta BadUSB pourrait taper en 1 seconde : powershell -Command "Add-MpPreference -ExclusionPath 'C:\Users\$env:USERNAME\AppData\Roaming'"
+La commande Add-MpPreference est une commande système sensible. Pour qu'elle fonctionne, la fenêtre PowerShell doit être lancée en mode Administrateur.
+Si ta BadUSB ouvre un PowerShell "standard" (utilisateur normal), la commande affichera un message d'erreur rouge disant : "Accès refusé".
+Solution pour ton TP : Ta BadUSB doit faire Win + R, taper powershell, puis faire Ctrl + Shift + Enter pour forcer le mode admin (une fenêtre de confirmation "UAC" apparaîtra, que ta clé peut accepter en tapant "Flèche Gauche" puis "Entrée").
+Faire un venv pour installer pyarmor
+-------------------------------------------------------------------------------------------------------------------
+Probleme 3 : La persistance "bruyante" : Le dossier Startup est le premier endroit que les outils de nettoyage (comme CCleaner ou même le Gestionnaire des tâches) vérifient. C'est l'endroit le moins discret du monde.
+-------------------------------------------------------------------------------------------------------------------
+Probleme 4 : Connexion en clair : Tes échanges entre la victime et ton Ncat ne sont pas chiffrés. Si un administrateur réseau regarde ce qui passe (avec Wireshark), il peut lire tes commandes et tes résultats en texte brut.
+-------------------------------------------------------------------------------------------------------------------
+Probleme 5 : Dépendance à l'utilisateur : Ton attaque nécessite un accès physique (BadUSB). Les vrais virus se propagent par mail (phishing) ou failles de sécurité (exploits) à distance.
+-------------------------------------------------------------------------------------------------------------------
